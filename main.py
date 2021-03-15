@@ -1,11 +1,13 @@
 import time
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
+
 
 driver = webdriver.Firefox('..\\Crossknowledge')
 driver.get('https://teamshift-qa.crossknowledge.com/')
+driver.maximize_window()
 
 loginButton = driver.find_element_by_css_selector('body > main > header > nav > div.visible-lg-block > div > div > button')
 loginButton.click()
@@ -28,6 +30,7 @@ try:
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CLASS_NAME, "member-result__text-greeting"))
     )
+    driver.implicitly_wait(5)
     driver.quit()
 except:
     driver.quit()
