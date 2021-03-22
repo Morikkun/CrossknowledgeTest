@@ -1,4 +1,5 @@
 import time
+import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -31,6 +32,9 @@ try:
         EC.presence_of_element_located((By.CLASS_NAME, "member-result__text-greeting"))
     )
     driver.implicitly_wait(5)
+    expectedMessage = "Hello Diego"
+    foundMessage = driver.find_element_by_partial_link_text("Hello Diego")
+    driver.assertEqual(expectedMessage, foundMessage, "Message found, test was successful")
     driver.quit()
 except:
     driver.quit()
